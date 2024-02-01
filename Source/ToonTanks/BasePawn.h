@@ -14,11 +14,8 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
-
-
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	void RotateTurret(FVector LookAtTarget);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -39,8 +36,4 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Super Duper Variables", meta = (AllowPrivateAccess = "true")) // 이벤트 그래프상에서 getter만 주어짐
 	int32 EditAnywhereInt = 22;
 
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 };
