@@ -15,22 +15,6 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
-	UPROPERTY(VisibleInstanceOnly)
-	int32 VisibleInstanceOnlyInt = 12;
-	
-	UPROPERTY(VisibleDefaultsOnly)
-	int32 VisibleDefaultOnlyInt = 12;
-
-	UPROPERTY(EditDefaultsOnly)
-	int32 EditDefaultsOnlyInt = 9;
-
-	UPROPERTY(EditInstanceOnly)
-	int32 EditInstanceOnlyInt = 14;
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Speed = 400.f;
-
 
 protected:
 	// Called when the game starts or when spawned
@@ -59,8 +43,4 @@ private:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	// 키보드 키나 마우스 클릭과 같은 입력 처리
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };

@@ -16,6 +16,9 @@ class TOONTANKS_API ATank : public ABasePawn
 	
 public:
 	ATank();
+	// Called to bind functionality to input
+	// 키보드 키나 마우스 클릭과 같은 입력 처리
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -27,5 +30,14 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCameraComponent* Camera;
+	
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float Speed = 400.f;
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float TurnRate = 200.f;
+
+	void Move(float Value);
+
+	void Turn(float Value);
 };
