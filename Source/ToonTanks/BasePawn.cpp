@@ -4,8 +4,9 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
+#include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -29,7 +30,12 @@ ABasePawn::ABasePawn()
 void ABasePawn::HandleDestruction()
 {
 	// TODO : 폰이 죽을때 발생하는 시각 및 음향 효과를 다룬다.
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+	}
 }
+
 
 void ABasePawn::RotateTurret(FVector LookAtTarget)
 {
