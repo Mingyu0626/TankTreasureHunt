@@ -39,15 +39,17 @@ void AProjectile::BeginPlay()
 
 void AProjectile::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	auto MyOwner = GetOwner();
+	// ★★★★★언리얼 코딩 관행상 auto를 권장하지 않는다.★★★★★
+	auto MyOwner = GetOwner(); // auto 대신 AActor*
 	if (MyOwner == nullptr) 
 	{
 		Destroy();
 		return;
 	}
 
-	auto MyOwnerInstigator = MyOwner->GetInstigatorController();
-	auto DamageTypeClass = UDamageType::StaticClass();
+	auto MyOwnerInstigator = MyOwner->GetInstigatorController(); // auto 대신 AController*
+	auto DamageTypeClass = UDamageType::StaticClass(); // auto 대신 UClass*
+
 	// OhterActor가 null이 아니고, 발사체가 자기 자신에게 데미지를 주지 않고, 발사체가 소유가자 아닐때만 데미지가 들어가도록 한다.
 	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
@@ -60,6 +62,11 @@ void AProjectile::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimi
 		if (HitSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+		}
+
+		if (HitCameraShakeClass)
+		{
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShakeClass);
 		}
 	}
 	Destroy();

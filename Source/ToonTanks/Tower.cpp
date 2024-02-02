@@ -37,8 +37,14 @@ void ATower::BeginPlay()
 
 void ATower::CheckFireCondition()
 {
-	// 1. 탱크가 유효하고, 타워의 사정거리 안에 있는지 확인
-	if (InFireRange())
+	// 탱크가 죽었을때도 범위 안에 있다고 계속 쏘면 안되니까
+	if (Tank == nullptr)
+	{
+		return;
+	}
+
+	// 1. 탱크가 살아있고, 타워의 사정거리 안에 있는지 확인
+	if (InFireRange() && Tank->bAlive)
 	{
 		// 2. 사정거리 안에 있으면 Fire 호출
 		Fire();	
