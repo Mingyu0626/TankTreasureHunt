@@ -29,10 +29,15 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandleDestruction()
 {
-	// TODO : 폰이 죽을때 발생하는 시각 및 음향 효과를 다룬다.
+	// 폰이 죽을때 발생하는 시각 및 음향 효과를 다룬다.
 	if (DeathParticles)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+	}
+
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
 	}
 }
 

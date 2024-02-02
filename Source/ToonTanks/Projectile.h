@@ -38,6 +38,13 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UParticleSystemComponent* TrailParticles;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* LaunchSound;
+
+	// 전방 선언을 위에서 해준 타입은 다음에 사용할 때는 전방선언을 해줄 필요 없다.
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	USoundBase* HitSound;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
